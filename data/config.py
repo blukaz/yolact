@@ -172,6 +172,30 @@ pascal_sbd_dataset = dataset_base.copy({
     'class_names': PASCAL_CLASSES,
 })
 
+ec_seg_lvl1_dataset = dataset_base.copy({
+    'name': 'Remodel - Electrical Cabinet Level1 Segmentation',
+
+    'train_info': 'C:/Users/barel/Desktop/EC_Seg_Lvl1/EC_Seg_Lvl1.json',
+    'train_images': 'C:/Users/barel/Desktop/EC_Seg_Lvl1/train_images/',
+
+    'valid_info': 'C:/Users/barel/Desktop/EC_Seg_Lvl1_Val/EC_Seg_Lvl1.json',
+    'valid_images': 'C:/Users/barel/Desktop/EC_Seg_Lvl1_Val/train_images/',
+
+    'has_gt': True,
+    'class_names': ('Terminal Block'),
+    'label_map': None
+})
+
+cig_butts_dataset = dataset_base.copy({
+  'name': 'Immersive Limit - Cigarette Butts',
+  'train_info': 'C:/Users/barel/Downloads/cig_butts/train/coco_annotations.json',
+  'train_images': 'C:/Users/barel/Downloads/cig_butts/train/images/',
+  'valid_info': 'C:/Users/barel/Downloads/cig_butts/val/coco_annotations.json',
+  'valid_images': 'C:/Users/barel/Downloads/cig_butts/val/images/',
+  'class_names': ('cig_butt'),
+  'label_map': { 1:  1 }
+})
+
 
 
 
@@ -765,6 +789,26 @@ yolact_resnet50_pascal_config = yolact_resnet50_config.copy({
         'pred_scales': [[32], [64], [128], [256], [512]],
         'use_square_anchors': False,
     })
+})
+
+yolact_resnet50_ec_seg_lvl1_config = yolact_resnet50_config.copy({
+    'name': 'yolact_resnet50_ec_seg_lvl1_config',
+    # Dataset stuff
+    'dataset': ec_seg_lvl1_dataset,
+    'num_classes': len(ec_seg_lvl1_dataset.class_names) + 1,
+
+    # Image Size
+    'max_size': 480,
+})
+
+yolact_resnet50_cig_butts_config = yolact_resnet50_config.copy({
+    'name': 'yolact_plus_resnet50_cig_butts',
+    # Dataset stuff
+    'dataset': cig_butts_dataset,
+    'num_classes': len(cig_butts_dataset.class_names) + 1,
+
+    # Image Size
+    'max_size': 512,
 })
 
 # ----------------------- YOLACT++ CONFIGS ----------------------- #
